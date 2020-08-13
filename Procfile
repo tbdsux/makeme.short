@@ -1,0 +1,1 @@
+web: gunicorn "makemeshort:create_app()"
