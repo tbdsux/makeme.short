@@ -17,9 +17,9 @@ mail = Mail()
 csrf = CSRFProtect()
 
 
-def create_app(config_class=Development):
+def create_app(config_class=Production):
     app = Flask(__name__)
-    app.config.from_object(Development)  # use 'Production' in production mode
+    app.config.from_object(Production)  # use 'Production' in production mode
     app.url_map.strict_slashes = False  # allow trailing slashes in routes
 
     db.init_app(app)
