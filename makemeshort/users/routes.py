@@ -80,8 +80,6 @@ def request_forgot_pass():
         return redirect(url_for('users.dashboard'))
     form = ForgotPassReqForm()
 
-    print(os.getenv("MAIL_USERNAME"))
-
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User.query.filter_by(email=form.email.data).first()
