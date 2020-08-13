@@ -1,0 +1,23 @@
+{% extends "dashboard/base.html" %}
+
+{% block main_content %}
+            <!-- dashboard -->
+            <div class="w-full">
+                <h1 class="mt-3 tracking-wide text-mint-cream text-sm uppercase">Dashboard</h1>
+                <!-- total -->
+                <div class="my-3 flex items-center md:px-2">
+                    <div class="py-1 w-1/2 text-center md:text-left">
+                        <h2 class="text-4xl text-napples-yellow tracking-wider font-bold">{{ clicksTotal }}</h2>
+                        <p class="text-gray-400 font-thin tracking-wider">Total Clicks</p>
+                    </div>
+                    <div class="py-1 w-1/2 text-center md:text-left">
+                        <h2 class="text-4xl text-med-turq tracking-wider font-bold">{{ linksTotal }}</h2>
+                        <p class="text-gray-400 font-thin tracking-wider">Shortened Links</p>
+                    </div>
+                </div>
+                <!-- graph -->
+                <div id="overview" class="rounded bg-white w-full h-auto md:w-11/12 lg:w-4/5 xl:w-2/3 py-2 px-3">
+                    
+                </div>
+            </div>
+{% endblock main_content %}
