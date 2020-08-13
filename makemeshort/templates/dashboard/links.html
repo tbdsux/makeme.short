@@ -1,0 +1,41 @@
+{% extends "dashboard/base.html" %}
+
+{% block main_content %}
+            <!-- links -->
+            <div class="w-full">
+                <h1 class="mt-3 tracking-wide text-mint-cream text-sm uppercase">Your Shortened Links</h1>
+                <!-- search bar -->
+                <div class="my-3">
+                    <form>
+                        <input type="text" name="search-links" class="w-2/3 py-1 bg-transparent px-4 border-b-2 border-gray-600 focus:border-med-turq focus:bg-mint-cream focus:outline-none font-light text-sm" placeholder="Search something...">
+                        <input type="submit" name="search" value="Search" class="font-light border-gray-600 text-gray-600 bg-transparent cursor-pointer px-3 sm:px-4 py-1 text-sm uppercase border-2">
+                    </form>
+                </div>
+                <!-- all links table -->
+                <div class="pt-2">
+                    <ul class="w-full md:w-11/12 lg:w-5/6">
+                        <li>
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-left w-3/5 text-gray-500 text-xs md:text-sm uppercase tracking-wide">Link</h4>
+                                <h4 class="text-left w-2/5 text-gray-500 text-xs md:text-sm uppercase tracking-wide">Description</h4>
+                            </div>
+                        </li>
+                        <hr class="my-2 border-gray-800">
+                        {% for link in userlinks %}
+                            <li class="py-1">
+                                <a href="{{ url_for('links.stats_links', shorturl=link.shorten_url) }}" type="button" class="flex items-center justify-between hover:bg-trans-100 py-1 px-1 sm:px-2">
+                                    <div class="w-3/5 mx-1">
+                                        <p class="text-sm font-light tracking-wide md:text-base font-alt text-yellow-500">{{ domain.replace("https://", "").replace("http://", "").replace("www.", "") }}{{ link.shorten_url }}</p>
+                                        <small class="font-light text-gray-400"><span class="font-bold">{{ link.clicks|length }}</span> clicks</small>
+                                    </div>
+                                    <div class="w-2/5 mx-1">
+                                        <p class="truncate text-sm font-light tracking-wide md:text-base font-alt text-yellow-600">{{ link.description if not link.description == None else '_' }}</p>
+                                        <small class="font-light text-gray-400">{{ link.date_made.strftime("%b. %d, %Y") }}</small>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+{% endblock main_content %}

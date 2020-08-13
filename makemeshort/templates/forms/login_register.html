@@ -1,0 +1,218 @@
+{% extends "forms/base.html" %}
+
+{% block form %}
+            <a href="{{ url_for('index.home') }}" type="button" class="font-light text-sm tracking-wide text-gray-300 underline font-alt hover:text-yellow-500">Return to Home</a>
+            <div class="text-center flex items-center justify-center">
+                {% if display_register %}
+                <a type="button" id="loginTab" class="w-1/2 cursor-pointer bg-napples-yellow py-2 text-sm font-light tracking-wide rounded-tr hover:bg-med-turq">Login</a>
+                <a type="button" id="registerTab" class="w-1/2 cursor-pointer bg-white py-2 text-sm font-light tracking-wide rounded-tl">Register</a>
+                {% else %}
+                <a type="button" id="loginTab" class="w-1/2 cursor-pointer bg-white py-2 text-sm font-light tracking-wide rounded-tl">Login</a>
+                <a type="button" id="registerTab" class="w-1/2 cursor-pointer bg-napples-yellow py-2 text-sm font-light tracking-wide rounded-tr hover:bg-med-turq">Register</a>
+                {% endif %}
+            </div>
+            
+            <div class="p-4 sm:px-5 md:px-8 rounded-b bg-white">
+                <!-- login form -->
+                {% if display_login %}
+                <div id="loginForm" class="{{ display_login }}">
+                {% else %}
+                <div id="loginForm" class="block">
+                {% endif %}
+                    <h3 class="text-center text-midnight-green undeline text-lg pb-1 px-4">Already have an Account?</h3>
+                    <form action="{{ url_for('users.login_acc') }}" method="post" id="login-form">
+                        {{ loginform.hidden_tag() }}
+                        <div class="flex flex-col py-1">
+                            {{ loginform.username.label(class="font-light") }}
+                            {% if loginform.username.errors %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ loginform.username(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 border-red-600 focus:border-med-turq text-sm", id="login-username", placeholder="Your username") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2"></i>
+                                </div>
+                                <!-- error -->
+                                {% for error in loginform.username.errors %}
+                                    <div class="pt-1 error">
+                                        <p class="font-light text-xs sm:text-sm text-red-600">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ loginform.username(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 focus:border-med-turq text-sm", id="login-username", placeholder="Your username",) }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                </div>
+                                <!-- error -->
+                                <div class="pt-1 hidden error">
+                                    <p class="font-light text-xs sm:text-sm text-red-600">Please enter your username!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-col py-1">
+                            {{ loginform.password.label(class="font-light") }}
+                            {% if loginform.password.errors %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ loginform.password(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 border-red-600 focus:border-med-turq text-sm", id="login-password", placeholder="Your password") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2"></i>
+                                </div>
+                                <!-- error -->
+                                {% for error in loginform.password.errors %}
+                                    <div class="pt-1 error">
+                                        <p class="font-light text-xs sm:text-sm text-red-600">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ loginform.password(class="w-full font-light tracking-wide px-3 py-2 bg-gray-300 rounded focus:outline-none border-2 focus:border-med-turq text-sm", id="login-password", placeholder="Your password") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                </div>
+                                <!-- error -->
+                                <div class="pt-1 hidden error">
+                                    <p class="font-light text-xs sm:text-sm text-red-600">Password cannot be blank!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-row items-center py-1 relative">
+                            <label class="checkbox-label">
+                                {{ loginform.remember(id="login-remember") }}
+                                <span class="checkbox-login rectangular"></span>
+                            </label>
+                            {{ loginform.remember.label(class="font-light text-sm ml-6 mt-1") }}
+                        </div>
+                        <div class="py-2">
+                            {{ loginform.login(id="btn-login", class="px-6 py-2 font-medium uppercase text-sm tracking-wide bg-midnight-green text-mint-cream opacity-75 cursor-not-allowed") }}
+                        </div>
+                        <div class="mt-1">
+                            <a href="{{ url_for('users.request_forgot_pass') }}" class="text-sm font-light hover:text-midnight-green hover:underline">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+                <!-- register form -->
+                {% if display_register %}
+                <div id="registerForm" class="{{ display_register }}">
+                {% else %}
+                <div id="registerForm" class="hidden">
+                {% endif %}
+                    <h3 class="text-center text-midnight-green undeline text-lg pb-1 px-4">Create a New Account?</h3>
+                    <form action="{{ url_for('users.register_acc') }}" method="post" id="register-form">
+                        {{ registerform.hidden_tag() }}
+                        <div class="flex flex-col py-1">
+                            {{ registerform.username.label(class="font-light") }}
+                            {% if registerform.username.errors %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ registerform.username(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 border-red-600 focus:border-med-turq text-sm", id="register-username", placeholder="Enter your username") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2"></i>
+                                </div>
+                                <!-- error -->
+                                {% for error in registerform.username.errors %}
+                                    <div class="pt-1 error">
+                                        <p class="font-light text-xs sm:text-sm text-red-600">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ registerform.username(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 focus:border-med-turq text-sm", id="register-username", placeholder="Enter your username", maxlength=15) }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                </div>
+                                <!-- error -->
+                                <div class="pt-1 hidden error">
+                                    <p class="font-light text-xs sm:text-sm text-red-600">Please enter your username!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-col py-1">
+                            {{ registerform.email.label(class="font-light") }}
+                            {% if registerform.email.errors %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ registerform.email(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 border-red-600 focus:border-med-turq text-sm", id="register-email", placeholder="Enter your email address") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2"></i>
+                                </div>
+                                <!-- error -->
+                                {% for error in registerform.email.errors %}
+                                    <div class="pt-1 error">
+                                        <p class="font-light text-xs sm:text-sm text-red-600">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ registerform.email(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 focus:border-med-turq text-sm", id="register-email", placeholder="Enter your email address") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                </div>
+                                <!-- error -->
+                                <div class="pt-1 hidden error">
+                                    <p class="font-light text-xs sm:text-sm text-red-600">Please enter your username!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-col py-1">
+                            {{ registerform.password.label(class="font-light") }}
+                            {% if registerform.password.errors %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ registerform.password(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 border-red-600 focus:border-med-turq text-sm", id="register-password", placeholder="Enter your password") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2"></i>
+                                </div>
+                                <!-- error -->
+                                {% for error in registerform.password.errors %}
+                                    <div class="pt-1 error">
+                                        <p class="font-light text-xs sm:text-sm text-red-600">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ registerform.password(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 focus:border-med-turq text-sm", id="register-password", placeholder="Enter your password") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                </div>
+                                <!-- error -->
+                                <div class="pt-1 hidden error">
+                                    <p class="font-light text-xs sm:text-sm text-red-600">Password cannot be blank!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-col py-1">
+                            {{ registerform.confirm_password.label(class="font-light") }}
+                            {% if registerform.confirm_password.errors %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ registerform.confirm_password(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 border-red-600 focus:border-med-turq text-sm", id="register-confirm-password", placeholder="Confirm your password") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2"></i>
+                                </div>
+                                <!-- error -->
+                                {% for error in registerform.confirm_password.errors %}
+                                    <div class="pt-1 error">
+                                        <p class="font-light text-xs sm:text-sm text-red-600">{{ error }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="relative flex flex-row items-center">
+                                    {{ registerform.confirm_password(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 focus:border-med-turq text-sm", id="register-confirm-password", placeholder="Confirm your password") }}
+                                    <i id="icCheck" class="fas fa-check-circle text-med-turq absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                    <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2 invisible"></i>
+                                </div>
+                                <!-- error -->
+                                <div class="pt-1 hidden error">
+                                    <p class="font-light text-xs sm:text-sm text-red-600">Password cannot be blank!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="flex flex-row items-center py-1 relative">
+                            <label class="checkbox-label">
+                                {{ registerform.agree(id="check-register-agreement") }}
+                                <span class="checkbox-login rectangular"></span>
+                            </label>
+                            <p class="font-light text-sm ml-6 mt-1 truncate">I Agree to the <a href="#" class="text-med-turq hover:underline">Terms and Agreement</a></p>
+                        </div>
+                        <div class="py-2">
+                            <input id="btn-register" type="submit" name="submitRegister" value="Create Account" class="px-6 py-2 font-medium uppercase text-sm tracking-wide bg-midnight-green text-mint-cream opacity-75 cursor-not-allowed">
+                        </div>
+                    </form>
+                </div>
+            </div>
+{% endblock %}

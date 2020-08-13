@@ -1,0 +1,38 @@
+{% extends "forms/base.html" %}
+
+{% block form %}
+            <div class="p-4 sm:px-5 md:px-8 rounded-b bg-white">
+                <!-- forgot pass form -->
+                <div id="forgotpassForm">
+                    <h3 class="text-center text-midnight-green undeline text-lg pb-1 px-4">Forgot Your Password?</h3>
+                    <form action="" method="post" id="forgotpass-form">
+                        {{ form.hidden_tag() }}
+                        <div class="flex flex-col py-1">
+                            {{ form.email.label(class="font-light") }}
+                            {% if form.email.errors %}
+                            <div class="relative flex flex-row items-center">
+                                {{ form.email(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 border-red-600 focus:border-med-turq text-sm", placeholder="Enter your account email address") }}
+                                <i id="icError" class="fas fa-exclamation-circle text-red-600 absolute top-0 right-0 text-lg my-3 mr-2"></i>
+                            </div>
+                                <!-- error -->
+                                {% for error in form.email.errors %}
+                                <div id="error" class="pt-1">
+                                    <p class="font-light text-xs sm:text-sm text-red-600">{{ error }}</p>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                            <div class="relative flex flex-row items-center">
+                                {{ form.email(class="w-full font-light tracking-wide pl-3 pr-8 py-2 bg-gray-300 rounded focus:outline-none border-2 focus:border-med-turq text-sm", placeholder="Enter your account email address") }}
+                            </div>                                
+                            {% endif %}
+                        </div>
+                        <div class="py-2">
+                            {{ form.request(class="px-6 py-2 uppercase text-sm tracking-wide bg-midnight-green text-mint-cream opacity-75 hover:opacity-100 cursor-pointer") }}
+                        </div>
+                        <div class="mt-1">
+                            <a href="{{ url_for('users.login') }}" class="text-sm font-light hover:text-midnight-green hover:underline">Already have an account?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+{% endblock %}
