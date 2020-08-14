@@ -12,6 +12,7 @@ db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 login_manager.login_view = 'users.login'
+login_manager.login_message_category = 'blue'
 login_manager.session_protection = 'strong'
 mail = Mail()
 csrf = CSRFProtect()
