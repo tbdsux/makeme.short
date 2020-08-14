@@ -93,7 +93,7 @@ def redirect_link(shorturl):
         shorten_url=shorturl).first_or_404()
 
     if shortenedurl:
-        click = Clicks(client_ip=request.remote_addr, location=geocoder.ipinfo(request.remote_addr).country,
+        click = Clicks(client_ip=request.environ.get('HTTP_X_REAL_IP', request.remote_addr), location=geocoder.ipinfo(request.remote_addr).country,
                        referrer=parse_url(request.referrer), link=shortenedurl, shortlink_author=shortenedurl.author)
         db.session.add(click)
         db.session.commit()
