@@ -18,7 +18,7 @@ A Simple and Lightweight URL Shortener Flask App
 `virtualenv venv`
     - Windows <br>
     `venv\Scripts\activate`
-    - Linux / Mac <br>
+    - Linux / Mac<br>
     `source venv/bin/activate`
 3. Install Python 3 Requirements <br>
 `pip3 install -r requirements.txt`
