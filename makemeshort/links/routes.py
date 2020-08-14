@@ -94,14 +94,14 @@ def redirect_link(shorturl):
         shorten_url=shorturl).first_or_404()
 
     if shortenedurl:
-        # do not add the bots in the clicks
+        # do not add the crawler bots in the clicks (beta testing)
         if request.headers.get('Sec-Fetch-Site') and request.headers.get('Sec-Fetch-Mode') and request.headers.get('Sec-Fetch-Dest'):
             click = Clicks(client_ip=request.environ['HTTP_X_FORWARDED_FOR'], location=geocoder.ipinfo(request.environ['HTTP_X_FORWARDED_FOR']).country,
                            referrer=parse_url(request.referrer), link=shortenedurl, shortlink_author=shortenedurl.author)
             db.session.add(click)
             db.session.commit()
 
-    return render_template('dashboard/redirect.html', url=shortenedurl.long_url)
+    return redirect(shortenedurl.long_url)
 
 
 # delete link
