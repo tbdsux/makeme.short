@@ -90,19 +90,18 @@ def shorten_link():
 # redirect link
 @links.route('/<string:shorturl>')
 def redirect_link(shorturl):
-    headers = request.headers
-
-    print('Request Headers:' + str(headers))
-
     shortenedurl = ShortenedLinks.query.filter_by(
         shorten_url=shorturl).first_or_404()
 
     if shortenedurl:
-        click = Clicks(client_ip=request.environ['HTTP_X_FORWARDED_FOR'], location=geocoder.ipinfo(request.environ['HTTP_X_FORWARDED_FOR']).country,
-                       referrer=parse_url(request.referrer), link=shortenedurl, shortlink_author=shortenedurl.author)
-        db.session.add(click)
-        db.session.commit()
-        return redirect(shortenedurl.long_url)
+        # do not add the bots in the clicks
+        if request.headers.get('Sec-Fetch-Site') and request.headers.get('Sec-Fetch-Mode') and request.headers.get('Sec-Fetch-Dest'):
+            click = Clicks(client_ip=request.environ['HTTP_X_FORWARDED_FOR'], location=geocoder.ipinfo(request.environ['HTTP_X_FORWARDED_FOR']).country,
+                           referrer=parse_url(request.referrer), link=shortenedurl, shortlink_author=shortenedurl.author)
+            db.session.add(click)
+            db.session.commit()
+
+    return render_template('dashboard/redirect.html', url=shortenedurl.long_url)
 
 
 # delete link
