@@ -12,15 +12,15 @@ A Simple and Lightweight URL Shortener Flask App
 
 ## Running Locally
 - **Install Dependencies**
-1. Clone the repository
+1. Clone the repository <br>
 `git clone https://github.com/TheBoringDude/makeme.short.git`
-2. Install and activate virtual environment
+2. Install and activate virtual environment <br>
 `virtualenv venv`
-    - Windows
+    - Windows <br>
     `venv\Scripts\activate`
-    - Linux / Mac
+    - Linux / Mac <br>
     `source venv\Scripts\activate`
-3. Install Python 3 Requirements
+3. Install Python 3 Requirements <br>
 `pip3 install -r requirements.txt`
 
 - **Migrating the Database**
