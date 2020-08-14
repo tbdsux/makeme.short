@@ -12,11 +12,16 @@ import time
 users = Blueprint('users', __name__)
 
 
-@users.route('/datas')
-def datas():
+@users.route('/datas/links')
+def datalinks():
     links = ShortenedLinks.query.all()
+    return jsonify({'links': links}), 200
+
+
+@users.route('/datas/clicks')
+def dataclicks():
     clicks = Clicks.query.all()
-    return jsonify({links: clicks}), 200
+    return jsonify({'clicks': clicks}), 200
 
 
 @users.route('/account/login')
