@@ -32,7 +32,7 @@ python manage.py migrate
 python manage.py upgrade
 ```
 
-- **Starting the Server**
+- **Starting the Server** <br>
 `python manage.py runserver -d` The -d runs in `debug` mode.
 
 ## ToDo's:
