@@ -12,12 +12,19 @@ def home():
     return render_template('index/home.html', quickShortenForm=quickShortenForm)
 
 
+@index.route('/ip')
+def ip():
+    if request.environ['HTTP_X_FORWARDED_FOR']:
+        print(request.environ['HTTP_X_FORWARDED_FOR'])
+    return jsonify({'ip': request.remote_addr, 'x-ip': request.headers['X-Real-IP']})
+
+
 # quickly shorten urls
 @index.route('/_quick-shorten/new', methods=['POST'])
 def quick_shorten():
     req = request.get_json()
 
-    # if the request is none 
+    # if the request is none
     if req['longurl'] is None:
         return redirect(url_for('index.home'))
 
