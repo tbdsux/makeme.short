@@ -19,7 +19,7 @@ A Simple and Lightweight URL Shortener Flask App
     - Windows <br>
     `venv\Scripts\activate`
     - Linux / Mac <br>
-    `source venv\Scripts\activate`
+    `source venv/bin/activate`
 3. Install Python 3 Requirements <br>
 `pip3 install -r requirements.txt`
 
