@@ -90,6 +90,10 @@ def shorten_link():
 # redirect link
 @links.route('/<string:shorturl>')
 def redirect_link(shorturl):
+    headers = request.headers
+
+    print('Request Headers:' + str(headers))
+
     shortenedurl = ShortenedLinks.query.filter_by(
         shorten_url=shorturl).first_or_404()
 
