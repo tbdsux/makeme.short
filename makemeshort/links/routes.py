@@ -83,7 +83,8 @@ def shorten_link():
 
             return redirect(url_for('links.stats_links', shorturl=link.shorten_url))
         else:
-            return redirect(request.referer)  # if there is a problem in the validation, redirect to the referer
+            # if there is a problem in the validation, redirect to the referer
+            return redirect(request.referer)
 
 
 # redirect link
@@ -93,7 +94,7 @@ def redirect_link(shorturl):
         shorten_url=shorturl).first_or_404()
 
     if shortenedurl:
-        click = Clicks(client_ip=request.environ.get('HTTP_X_REAL_IP', request.remote_addr), location=geocoder.ipinfo(request.remote_addr).country,
+        click = Clicks(client_ip=request.environ['HTTP_X_FORWARDED_FOR'], location=geocoder.ipinfo(request.remote_addr).country,
                        referrer=parse_url(request.referrer), link=shortenedurl, shortlink_author=shortenedurl.author)
         db.session.add(click)
         db.session.commit()
