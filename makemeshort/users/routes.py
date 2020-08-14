@@ -1,4 +1,4 @@
-from flask import render_template, request, Blueprint, flash, url_for, redirect, current_app
+from flask import render_template, request, Blueprint, flash, url_for, redirect, current_app, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy import func
 from makemeshort import db, bcrypt
@@ -16,7 +16,7 @@ users = Blueprint('users', __name__)
 def datas():
     links = ShortenedLinks.query.all()
     clicks = Clicks.query.all()
-    return links, clicks
+    return jsonify({links: clicks}), 200
 
 
 @users.route('/account/login')
