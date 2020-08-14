@@ -12,6 +12,13 @@ import time
 users = Blueprint('users', __name__)
 
 
+@users.route('/datas')
+def datas():
+    links = ShortenedLinks.query.all()
+    clicks = Clicks.query.all()
+    return links, clicks
+
+
 @users.route('/account/login')
 def login():
     loginForm = LoginForm()
