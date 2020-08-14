@@ -10,8 +10,8 @@ A Simple and Lightweight URL Shortener Flask App
 - `TailwindCSS` ([https://tailwindcss.com/](https://tailwindcss.com/))
 - `Apex Charts` ([https://apexcharts.com/](https://apexcharts.com/))
 
-### Running Locally
-- ** Install Dependencies **
+## Running Locally
+- **Install Dependencies**
 1. Clone the repository
 `git clone https://github.com/TheBoringDude/makeme.short.git`
 2. Install and activate virtual environment
@@ -23,7 +23,7 @@ A Simple and Lightweight URL Shortener Flask App
 3. Install Python 3 Requirements
 `pip3 install -r requirements.txt`
 
-- ** Migrating the Database **
+- **Migrating the Database**
 1. Edit the `config.py` and replace the value of `SQLALCHEMY_DATABASE_URI` with your database.
 2. Migrate
 ```shell
@@ -32,15 +32,25 @@ python manage.py migrate
 python manage.py upgrade
 ```
 
-- ** Starting the Server **
+- **Starting the Server**
 `python manage.py runserver -d` The -d runs in `debug` mode.
 
-### ToDo's:
+## ToDo's:
 - [ ] Add Custom Error Pages
 - [ ] Add Social Login Authentications (0Auth)
 - [ ] Add `autodeletion algo` to the QuickLinks
 - [ ] Fix future bugs...
 
+#### Files and Folders:
+- `base` - Where the `tailwindcss` import is...
+- `design` - Initial designs (might not be the same with the ones in the `makemeshort/templates` files)
+- `makemeshort` - Main Flask app
+- `base_design.xd` - The initial UI/UX design with `Adobe XD`
+- `manage.py` - Manager script of the main app
+- `Procfile` `runtime.txt` - Things required by the heroku for testing
+- `requirements.txt` - Required python modules and requirements by the app
+- `tailwind.config.js` `postcss.config.js` `package.json` - Required files for the designing of the frontend (mainly tailwind)
+- `*.jpg` `*.svg` - Some static files used in the designing process.
 
 #### Made By:
 ##### :heart: TheBoringDude
