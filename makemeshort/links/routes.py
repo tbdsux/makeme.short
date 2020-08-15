@@ -146,6 +146,6 @@ def edit_link_desc(shorturl):
 
 
 def parse_url(referer):
-    if referer is not None:
+    if referer is not None and referer is not request.url_root:
         return url_parse(referer).host
-    return 'None'
+    return 'Direct'
