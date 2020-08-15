@@ -6,7 +6,7 @@
             <h1 class="text-4xl md:text-5xl text-white font-bold tracking-wide"><span class="font-black text-6xl">403</span> <br>Forbidden</h1>
             <p class="font-light mt-8 tracking-wide text-base md:text-lg bg-gray-100 py-2 rounded px-4 py-1">Sorry, you are not authorized to access this page.</p>
             <div>
-                <a href="#" type="button" class="font-light text-white underline tracking-wide mt-8">Return Home</a>
+                <a href="{{ url_for('index.home') }}" type="button" class="font-light text-white underline tracking-wide mt-8">Return Home</a>
             </div>
         </div>
 {% endblock %}

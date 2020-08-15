@@ -1,4 +1,5 @@
 from flask import render_template, request, Blueprint, flash, url_for, redirect, jsonify, make_response
+from flask_login import current_user
 from makemeshort import db
 from makemeshort.models import QuickLinks
 from makemeshort.links.forms import DirectShortenLinkForm
@@ -8,6 +9,10 @@ index = Blueprint('index', __name__)
 
 @index.route('/')
 def home():
+    # bypass if user is currently authenticated
+    if current_user.is_authenticated:
+        return redirect(url_for('users.dashboard'))
+        
     quickShortenForm = DirectShortenLinkForm()
     return render_template('index/home.html', quickShortenForm=quickShortenForm)
 
