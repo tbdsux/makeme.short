@@ -49,7 +49,7 @@
                         <h3 class="font-light text-sm tracking-wider text-gray-500 tracking-wide">Top Referrer</h3>
                         <ul class="mt-1 ml-4 font-alt text-sm font-light ml-4">
                             {% for referrer in top_referrer %}
-                                {% if referrer == domain.replace("https://", "").replace("http://", "").replace("www.", "") or referrer == None %}
+                                {% if referrer[0] == domain.replace("https://", "").replace("http://", "").replace("www.", "") or referrer[0] == None %}
                                     <li class="py-1">
                                         <span class="tracking-wider ml-2">Direct ({{ referrer[1] }})</span>
                                     </li>
