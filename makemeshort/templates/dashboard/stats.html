@@ -47,11 +47,17 @@
                     </div>
                     <div class="bg-trans-100 py-2 px-3 text-gray-400 mt-2 md:mt-0">
                         <h3 class="font-light text-sm tracking-wider text-gray-500 tracking-wide">Top Referrer</h3>
-                        <ul class="mt-1 ml-4 font-alt text-sm font-light list-decimal list-inside ml-4">
+                        <ul class="mt-1 ml-4 font-alt text-sm font-light ml-4">
                             {% for referrer in top_referrer %}
-                                <li class="py-1">
-                                    <span class="tracking-wider ml-2">{{ referrer[0] }} ({{ referrer[1] }})</span>
-                                </li>
+                                {% if referrer == domain.replace("https://", "").replace("http://", "").replace("www.", "") and referrer == None %}
+                                    <li class="py-1">
+                                        <span class="tracking-wider ml-2">Direct ({{ referrer[1] }})</span>
+                                    </li>
+                                {% else %}
+                                    <li class="py-1">
+                                        <span class="tracking-wider ml-2">{{ referrer[0] }} ({{ referrer[1] }})</span>
+                                    </li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                     </div>

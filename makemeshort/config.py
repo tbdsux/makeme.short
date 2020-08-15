@@ -25,5 +25,5 @@ class Development(Config):
 
 class Production(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = "postgres://nmdusrisgetesx:f1553d96c08224e8529608261ef42dbdc41447d1cd7416a9866b4f23db547876@ec2-34-197-188-147.compute-1.amazonaws.com:5432/d2rt3gp8n5ei5b"
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SECRET_KEY = os.getenv('SECRET_KEY')

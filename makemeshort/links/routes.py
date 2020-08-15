@@ -49,7 +49,7 @@ def stats_links(shorturl):
     req_countries = db.session.query(Clicks.location, func.count(Clicks.id).label('cnt')).group_by(
         Clicks.location).filter(Clicks.link == shortlink, Clicks.shortlink_author == current_user, Clicks.location != None).order_by(desc('cnt')).limit(3).all()
     req_referrer = db.session.query(Clicks.referrer, func.count(Clicks.id).label('rcnt')).group_by(
-        Clicks.referrer).filter(Clicks.link == shortlink, Clicks.shortlink_author == current_user, Clicks.referrer != parse_url(request.url_root), Clicks.referrer != 'None').order_by(desc('rcnt')).limit(3).all()
+        Clicks.referrer).filter(Clicks.link == shortlink, Clicks.shortlink_author == current_user).order_by(desc('rcnt')).limit(3).all()
 
     # for the chart
     cpd = db.session.query(func.date(Clicks.date_clicked), func.count(Clicks.id).label('count')).group_by(
