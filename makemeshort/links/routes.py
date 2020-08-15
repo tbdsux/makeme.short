@@ -146,6 +146,10 @@ def edit_link_desc(shorturl):
 
 
 def parse_url(referer):
-    if referer is not None and referer is not request.url_root:
-        return url_parse(referer).host
+    if referer is not None:
+        __ref = url_parse(referer).host
+        # only get the host if it is not from the the same website
+        if not __ref is url_parse(request.url_root).host:
+            return __ref
+
     return 'Direct'
