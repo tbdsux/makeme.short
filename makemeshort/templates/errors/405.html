@@ -1,0 +1,12 @@
+{% extends "errors/base.html" %}
+
+{% block error %}
+        <!-- main error -->
+        <div class="w-full md:w-5/6 mx-auto text-center mt-6">
+            <h1 class="text-4xl md:text-5xl text-white font-bold tracking-wide"><span class="font-black text-6xl">405</span> <br>Method Not Allowed</h1>
+            <p class="font-light mt-8 tracking-wide text-base md:text-lg bg-gray-100 py-2 rounded px-4 py-1">Sorry, your request is not allowed.</p>
+            <div>
+                <a href="#" type="button" class="font-light text-white underline tracking-wide mt-8">Return Home</a>
+            </div>
+        </div>
+{% endblock %}

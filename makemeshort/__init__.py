@@ -1,11 +1,10 @@
-from flask import Flask, abort
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
-from functools import wraps
 from makemeshort.config import Development, Production
 
 db = SQLAlchemy()
@@ -33,9 +32,11 @@ def create_app(config_class=Production):
     from makemeshort.index.routes import index
     from makemeshort.users.routes import users
     from makemeshort.links.routes import links
+    from makemeshort.errors.handler import errors
 
     app.register_blueprint(index)
     app.register_blueprint(users)
     app.register_blueprint(links)
+    app.register_blueprint(errors)
 
     return app

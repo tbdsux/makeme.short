@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | makeme.short</title>
+    <!-- favicon > ref: <a href="https://icons8.com/icon/NC8Fh1I7Z_Ax/short-position">Short Position icon by Icons8</a>-->
+    <link rel="icon" type="image/png" href="https://img.icons8.com/officel/16/000000/short-position.png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/build.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased bg-midnight-green h-screen w-full flex items-center justify-center">
+    <div class="w-5/6 mx-auto" id="container">
+        <div class="text-center">
+            <h1 class="text-med-turq tracking-wider text-lg font-bold">makeme.short</h1>
+        </div>
+        {% block error %}
+            
+        {% endblock %}
+    </div>
+
+    <script type="text/javascript">
+        window.onresize = function(){
+            resizeMe();
+        }
+        window.onload = function(){
+            resizeMe();
+        }
+
+
+        function resizeMe(){
+            // when the screen is resized to 400 pixels height
+            if (screen.height <= 400){
+                document.body.classList.add('h-full');
+                document.body.classList.remove('h-screen');
+                document.getElementById('container').classList.add('py-8');
+            }else{
+                document.body.classList.remove('h-full');
+                document.body.classList.add('h-screen');
+                document.getElementById('container').classList.remove('py-8');
+            }
+        }
+    </script>
+</body>
+</html>
