@@ -39,7 +39,7 @@
                                 <li class="py-1">
                                     <div class="flex items-start">
                                         <img src="{{ get_countryflag(country[0]) }}" class="h-4 object-cover w-auto">
-                                        <span class="tracking-wider ml-1">{{ get_country(country[0]) }}</span>
+                                        <span class="tracking-wider ml-1">{{ get_country(country[0]) }} ({{ country[1] }})</span>
                                     </div>
                                 </li>
                             {% endfor %}
@@ -50,7 +50,7 @@
                         <ul class="mt-1 ml-4 font-alt text-sm font-light list-decimal list-inside ml-4">
                             {% for referrer in top_referrer %}
                                 <li class="py-1">
-                                    <span class="tracking-wider ml-2">{{ referrer[0] }}</span>
+                                    <span class="tracking-wider ml-2">{{ referrer[0] }} ({{ referrer[1] }})</span>
                                 </li>
                             {% endfor %}
                         </ul>
