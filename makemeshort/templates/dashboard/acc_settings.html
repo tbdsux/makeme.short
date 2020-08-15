@@ -10,7 +10,7 @@
                     {% with messages = get_flashed_messages(with_categories=true) %}
                         {% if messages %}
                             {% for category, message in messages %}
-                            <div class="bg-{{ category }}-700 px-2 py-1 text-gray-100 rounded">
+                            <div class="bg-{{ category }}-600 px-2 py-1 text-gray-100 rounded">
                                 <p class="font-thin text-sm tracking-wider">{{ message }}</p>
                             </div>
                             {% endfor %}
