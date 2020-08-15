@@ -36,7 +36,8 @@ python manage.py upgrade
 `python manage.py runserver -d` The -d runs in `debug` mode.
 
 ## ToDo's:
-- [ ] Add Custom Error Pages
+- [x] Add Custom Error Pages
+- [ ] Add Admin Page
 - [ ] Add Social Login Authentications (0Auth)
 - [ ] Add `autodeletion algo` to the QuickLinks
 - [ ] Fix future bugs...
