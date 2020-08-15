@@ -38,6 +38,7 @@ python manage.py upgrade
 ## ToDo's:
 - [x] Add Custom Error Pages
 - [ ] Add Admin Page
+- [ ] Add functionality to the search bar in the `Links` section
 - [ ] Add Social Login Authentications (0Auth)
 - [ ] Add `autodeletion algo` to the QuickLinks
 - [ ] Fix future bugs...
