@@ -1,7 +1,7 @@
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 
-# load_dotenv()  # > enable when running in venv
+load_dotenv()
 
 
 class Config:
