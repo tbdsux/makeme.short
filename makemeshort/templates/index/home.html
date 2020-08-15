@@ -182,11 +182,11 @@
         }
 
         // show the error
-        const errorContainer = document.getElementById('error-directShorten');
-        const errorMessage = document.getElementById('error-message');
+        const directShortenErr = document.getElementById('error-directShorten');
+        const directShortenErrMessage = document.getElementById('error-message');
         function showError(error){
-            errorContainer.classList.remove('hidden');
-            errorMessage.innerText = error;
+            directShortenErr.classList.remove('hidden');
+            directShortenErrMessage.innerText = error;
 
             // disable the button
             disableButton();
