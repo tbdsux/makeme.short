@@ -29,6 +29,13 @@
                     <a type="button" id="btn-shortenDirecturl" onclick="quick_shorten()" class="px-6 py-2 font-light tracking-wide bg-gray-400 opacity-75 cursor-not-allowed focus:outline-none">Quick Shorten</a>
                 </div>
             </div>
+            <!-- error output -->
+            <div id="error-directShorten" class="hidden mt-3">
+                <hr>
+                <div class="mt-1">
+                    <p class="font-light tracking-wide text-red-600" id="error-message">Bad Request. Please reload the website and try again.</p>
+                </div>
+            </div>
             <!-- output -->
             <div id="output-directShorten" class="hidden mt-3">
                 <hr>
@@ -142,6 +149,15 @@
             }).then(function (response){
                 if (response.status !== 200){
                     console.log('An error has occured..');
+                    if (response.status === 400){
+                        showError('400 Bad Request. Please reload the website and try again.');
+                    }
+                    else if (response.status === 500){
+                        showError('500 Internal Server Error. This is a problem in our side, please try again later while we fix it.');
+                    }
+                    else{
+                        showError('There seems to be a problem with your request. Please try again.')
+                    }
                     return;
                 }
                 response.json().then(function(data){
@@ -153,6 +169,7 @@
             });
         }
 
+        // output the data
         const outputQuickShorten = document.getElementById('output-directShorten');
         const outputQuickLink = document.getElementById('output-quicklink');
         function showQuickShortenOutput(output){
@@ -161,6 +178,22 @@
             outputQuickLink.href = output['shortlink'];
 
             // disable the button
+            disableButton();
+        }
+
+        // show the error
+        const errorContainer = document.getElementById('error-directShorten');
+        const errorMessage = document.getElementById('error-message');
+        function showError(error){
+            errorContainer.classList.remove('hidden');
+            errorMessage.innerText = error;
+
+            // disable the button
+            disableButton();
+        }
+
+        // disable the button
+        function disableButton(){
             quickShortenBtn.disabled = true;
             quickShortenBtn.classList.add('cursor-not-allowed');
             quickShortenBtn.classList.add('opacity-75');
