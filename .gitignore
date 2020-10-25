@@ -3,3 +3,4 @@ node_modules
 migrations
 venv
 __pycache__
+**/*build.css
